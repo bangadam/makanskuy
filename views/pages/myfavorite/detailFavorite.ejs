@@ -1,0 +1,86 @@
+<%- include('../../partials/head') -%>
+
+<!--================ Header Menu Area start =================-->
+<%- include('../../partials/header') -%>
+<!--================Header Menu Area =================-->
+
+<!--================Blog Area =================-->
+<section class="blog_area single-post-area section-margin mt-4">
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-lg-8 posts-list"
+        style="border: 1px solid; padding: 20px;"
+      >
+        <div class="single-post">
+          <div class="feature-img">
+            <img
+              class="mx-auto d-block"
+              src="<%= recipes.image  %>"
+              alt=""
+              width="40%"
+            />
+          </div>
+          <div class="blog_details">
+            <h2>
+              <%= recipes.title %>
+            </h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-inverse">
+                <thead class="thead-inverse">
+                  <tr>
+                    <th>ingredients</th>
+                    <th>Weight / gram</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% recipes.ingredients.forEach(element => { %>
+                  <tr>
+                    <td><%= element.text %></td>
+                    <td><%= element.weight %></td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="blog_right_sidebar">
+          <aside
+            class="single_sidebar_widget post_category_widget"
+            style="border: 1px solid;"
+          >
+            <h4 class="widget_title">Health Labels :</h4>
+            <ul class="list cat-list">
+              <% recipes.healthLabels.forEach(element => { %>
+              <li>
+                <p><%= element %></p>
+              </li>
+              <% }) %>
+            </ul>
+          </aside>
+          <aside
+            class="single_sidebar_widget post_category_widget"
+            style="border: 1px solid;"
+          >
+            <h4 class="widget_title">Diet Labels :</h4>
+            <ul class="list cat-list">
+              <% recipes.dietLabels.forEach(element => { %>
+              <li>
+                <p><%= element %></p>
+              </li>
+              <% }) %>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================Blog Area =================-->
+
+<!-- ================ start footer Area ================= -->
+
+<%- include('../../partials/footer') -%>

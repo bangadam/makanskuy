@@ -1,0 +1,163 @@
+<%- include('../../partials/head') -%>
+
+<!--================ Header Menu Area start =================-->
+<%- include('../../partials/header') -%>
+<!--================Header Menu Area =================-->
+
+<!--================Hero Banner Section start =================-->
+
+<!--================Food menu section start =================-->
+<section class="section-margin" style="margin-top: 40px;">
+  <div class="container">
+    <div class="section-intro mb-2">
+      <h4 class="intro-title">Search for your favorite recipes</h4>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 mb-5">
+        <form action="/recipes/search" method="GET">
+          <div class="input-group">
+            <input type="text" class="form-control" name="recipes" />
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit">
+                Find a recipe
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <% for( let index = 0; index < recipes.hits.length; index++ ) { %>
+      <div class="col-lg-6">
+        <div class="media align-items-center food-card">
+          <img
+            class="mr-3 mr-sm-4"
+            src="<%= recipes.hits[index].recipe.image %>"
+            width="15% !important"
+            alt=""
+          />
+          <div class="media-body">
+            <div class="d-flex justify-content-between food-card-title">
+              <h4><%= recipes.hits[index].recipe.label %></h4>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                Diet Label :
+                <br />
+                <ul>
+                  <% recipes.hits[index].recipe.dietLabels.forEach(element => {
+                  %>
+                  <li><%= element %></li>
+                  <% }) %>
+                </ul>
+                <br />
+              </div>
+              <div class="col-md-6">
+                Health Label :
+                <br />
+                <ul>
+                  <% recipes.hits[index].recipe.healthLabels.forEach(element =>
+                  { %>
+                  <li><%= element %></li>
+                  <% }) %>
+                </ul>
+              </div>
+              <div class="col-md-12">
+                <!-- Button trigger modal -->
+                <button
+                  type="button"
+                  class="btn btn-danger btn-detail btn-block"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter-<%= index %>"
+                >
+                  Detail Recipe
+                </button>
+                <% if (user) { %>
+                <div style="margin-top: 10px !important;">
+                  <form action="/recipes/addToFavorite" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                    <input
+                      type="hidden"
+                      name="recipes"
+                      value="<%= JSON.stringify(recipes.hits[index].recipe) %>"
+                    />
+                    <button class="btn btn-warning btn-block">
+                      Add to favorite
+                    </button>
+                  </form>
+                </div>
+                <% } %>
+                <!-- Modal -->
+                <div
+                  class="modal fade"
+                  id="exampleModalCenter-<%= index %>"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="exampleModalCenterTitle"
+                  aria-hidden="true"
+                >
+                  <div
+                    class="modal-dialog modal-lg modal-dialog-centered"
+                    role="document"
+                  >
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">
+                          Detail Recipe
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Ingredient</th>
+                              <th>Weight / gram</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <%
+                            recipes.hits[index].recipe.ingredients.forEach(function(element){
+                            %>
+                            <tr>
+                              <td><%= element.text %></td>
+                              <td><%= element.weight %>e</td>
+                            </tr>
+                            <% }); %>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<!--================Chef section end =================-->
+
+<!-- ================ start footer Area ================= -->
+
+<%- include('../../partials/footer') -%>

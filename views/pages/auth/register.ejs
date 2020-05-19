@@ -1,0 +1,73 @@
+<%- include('../../partials/head') -%>
+
+<!--================ Header Menu Area start =================-->
+<%- include('../../partials/header') -%>
+<!--================Header Menu Area =================-->
+<!--================About Section start =================-->
+<section class="about section-margin pb-xl-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-xl-6 mb-5 mb-md-0 pb-5 pb-md-0">
+        <div class="img-styleBox">
+          <div class="styleBox-border">
+            <img
+              class="styleBox-img1 img-fluid"
+              src="/img/home/about-img1.png"
+              alt=""
+            />
+          </div>
+          <img
+            class="styleBox-img2 img-fluid"
+            src="/img/home/about-img2.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="col-md-6 pl-md-5 pl-xl-0 offset-xl-1 col-xl-5">
+        <div class="section-intro mb-lg-4">
+          <h4 class="intro-title">Sign Up Now</h4>
+        </div>
+        <% if (messages.errors) { %>
+
+        <div class="alert alert-danger">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-hidden="true"
+          >
+            &times;
+          </button>
+          <strong>Account with that email address already exists. </strong>
+        </div>
+
+        <% } %>
+        <form action="/register" method="POST">
+          <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+          <div class="form-group">
+            <label for="">Username</label>
+            <input type="text" name="username" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" name="email" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="">Password</label>
+            <input type="password" name="password" class="form-control" />
+          </div>
+          <button type="submit" class="btn btn-block btn-primary">
+            Sign Up
+          </button>
+        </form>
+        <div class="text-center mt-2">
+          i have account ? <a href="/login">Sign In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================About Section End =================-->
+
+<!-- ================ start footer Area ================= -->
+<%- include('../../partials/footer') -%>

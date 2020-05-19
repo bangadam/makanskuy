@@ -1,0 +1,48 @@
+<%- include('../../partials/head') -%>
+
+<!--================ Header Menu Area start =================-->
+<%- include('../../partials/header') -%>
+<!--================Header Menu Area =================-->
+
+<!--================Hero Banner Section start =================-->
+
+<!--================Hero Banner Section end =================-->
+<!--================Food menu section start =================-->
+<section class="section-margin" style="margin-top: 40px;">
+  <div class="container">
+    <div class="section-intro mb-2">
+      <h4 class="intro-title">List of favorite recipes</h4>
+    </div>
+    <div class="row">
+      <% recipes.forEach(element => { %>
+      <div class="col-lg-6">
+        <div class="media align-items-center food-card">
+          <img
+            class="mr-3 mr-sm-4"
+            src="<%= element.image %>"
+            alt=""
+            width="20% !important"
+          />
+          <div class="media-body">
+            <div class="d-flex justify-content-between food-card-title">
+              <h4>
+                <a
+                  href="/myfavorite/detail/<%= element._id %>"
+                  style="color: black;"
+                  ><%= element.title %></a
+                >
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!--================Chef section end =================-->
+
+<!-- ================ start footer Area ================= -->
+
+<%- include('../../partials/footer') -%>
